@@ -1,0 +1,45 @@
+// Theme colour help here: http://mcg.mbitson.com
+
+@use '@angular/material' as mat;
+@include mat.core();
+
+mat.$theme-ignore-duplication-warnings: true;
+
+@import 'src/app/dashboard/layout-tab/layout-tab.component.scss';
+
+// Indigo
+$my-app-primary: mat.define-palette(mat.$indigo-palette);
+$my-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$my-app-theme: mat.define-light-theme(( color:( primary: $my-app-primary, accent: $my-app-accent), typography: mat.define-typography-config(), density: 0));
+@include mat.all-component-themes($my-app-theme);
+
+.deep-purple-theme {
+  $pa-primary: mat.define-palette(mat.$deep-purple-palette);
+  $pa-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+  $purple-amber-theme: mat.define-light-theme(( color:( primary: $pa-primary, accent: $pa-accent), typography: mat.define-typography-config(), density: 0));
+  @include mat.all-component-themes($purple-amber-theme);
+}
+
+.pink-theme {
+  $bg-primary: mat.define-palette(mat.$pink-palette, 700, 500, 900);
+  $bg-accent: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400);
+  $pink-theme: mat.define-dark-theme(( color:( primary: $bg-primary, accent: $bg-accent), typography: mat.define-typography-config(), density: 0));
+  @include mat.all-component-themes($pink-theme);
+}
+
+.purple-theme {
+  $lb-primary: mat.define-palette(mat.$purple-palette, 700, 500, 800);
+  $lb-accent: mat.define-palette(mat.$green-palette, A200, A100, A400);
+  $purple-theme: mat.define-dark-theme(( color:( primary: $lb-primary, accent: $lb-accent), typography: mat.define-typography-config(), density: 0));
+  @include mat.all-component-themes($purple-theme);
+}
+
+.yellow-theme {
+  $y-primary: mat.define-palette(mat.$yellow-palette);
+  $y-accent: mat.define-palette(mat.$orange-palette, A400, A100, A700);
+  $y-warn: mat.define-palette(mat.$red-palette);
+  $yellow-theme: mat.define-dark-theme(( color:( primary: $y-primary, accent: $y-accent, warn: $y-warn), typography: mat.define-typography-config(), density: 0));
+  @include mat.all-component-themes($yellow-theme);
+}
+
+@include primary-colours-theme($my-app-theme);
