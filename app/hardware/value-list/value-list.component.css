@@ -1,0 +1,35 @@
+:host {
+  width: 100%;
+  margin: 12px auto auto auto;
+}
+
+.mat-row:hover {
+  background-color: lightgray;
+  border-radius: 4px;
+}
+
+.mat-card-subtitle {
+  display: block;
+  margin-bottom: 0px;
+  min-width: 125px;
+}
+
+.mat-column-Value {
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.mat-column-RetentionDays {
+  flex: 0 0 100px !important;
+  width: 100px !important;
+}
+
+.mat-column-RetentionInterval {
+  flex: 0 0 100px !important;
+  width: 100px !important;
+}
+
+.mat-column-Debug {
+  flex: 0 0 75px !important;
+  width: 75px !important;
+}

@@ -1,0 +1,66 @@
+<mat-card>
+  <mat-card-header>
+    <img mat-card-avatar src="https://source.unsplash.com/random/200x200">
+    <mat-card-title>Interfaces</mat-card-title>
+    <mat-card-subtitle>Interface maintenance</mat-card-subtitle>
+    <div align="right" style="width: 100%; margin: auto;">
+      <button mat-mini-fab color="primary" (click)="goBack();" matTooltip="Previous" [matTooltipShowDelay]="500"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(getItemCount() <= 1)" (click)="onFilter();" matTooltip="Filter" [matTooltipShowDelay]="500"><mat-icon>filter_list</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null) || (selectedRowActive == 1)" (click)="onStart();" matTooltip="Start" [matTooltipShowDelay]="500"><mat-icon>play_arrow</mat-icon></button>
+      <button mat-mini-fab color="accent" [disabled]="(selectedRow == null) || (selectedRowActive != 1)" (click)="onStop();" matTooltip="Stop" [matTooltipShowDelay]="500"><mat-icon>stop</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" routerLink="/Interfaces/{{selectedRowNumber}}/InterfaceLogs" matTooltip="Log" [matTooltipShowDelay]="500"><mat-icon>message</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" routerLink="/Interfaces/{{selectedRowNumber}}/Devices" matTooltip="Related Devices" [matTooltipShowDelay]="500"><mat-icon>extension</mat-icon></button>
+      <button mat-mini-fab color="primary" (click)="onNew();" matTooltip="New" [matTooltipShowDelay]="500"><mat-icon>add</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" (click)="onEdit();" matTooltip="Edit" [matTooltipShowDelay]="500"><mat-icon>edit</mat-icon></button>
+      <button mat-mini-fab color="accent" [disabled]="(selectedRow == null)" (click)="onDelete();" matTooltip="Delete" [matTooltipShowDelay]="500"><mat-icon>delete</mat-icon></button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="InterfaceID">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+        <mat-cell *matCellDef="let interface">{{interface.InterfaceID}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let interface">{{interface.Name}}</mat-cell>
+
+      </ng-container>
+
+      <ng-container matColumnDef="Script">
+        <mat-header-cell *matHeaderCellDef>Python Script</mat-header-cell>
+        <mat-cell *matCellDef="let interface">{{interface.Script}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Configuration">
+        <mat-header-cell *matHeaderCellDef>Configuration</mat-header-cell>
+        <mat-cell *matCellDef="let interface">{{interface.Configuration}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Debug">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Debug</mat-header-cell>
+        <mat-cell *matCellDef="let interface" style="justify-content:center;"><mat-icon>{interface.Debug, plural, =1 {bug_report}}</mat-icon></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Notifiable">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Notifiable</mat-header-cell>
+        <mat-cell *matCellDef="let interface" style="justify-content:center;"><mat-icon>{interface.Notifiable, plural, =1 {notifications_active}}</mat-icon></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Active">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Active</mat-header-cell>
+        <mat-cell *matCellDef="let interface" style="justify-content:center;"><mat-icon>{interface.Active, plural, =1 {check_circle} other {highlight_off}}</mat-icon></mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="tableColumns; sticky: true"></mat-header-row>
+
+      <mat-row matRipple *matRowDef="let row; columns: tableColumns; "
+               (click)="(selectedRow == row) ? selectedRow = null : selectedRow = row; selectedRowNumber = row.InterfaceID; selectedRowActive = row.Active"
+               (dblclick)="selectedRow = row; selectedRowNumber = row.InterfaceID; onEdit();"
+               [style.background]="selectedRow == row ? 'lightblue' : ''">
+      </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[100, 10000, 1000, 500, 50, 10]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

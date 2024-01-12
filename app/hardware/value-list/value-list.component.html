@@ -1,0 +1,79 @@
+<mat-card>
+  <mat-card-header>
+    <img mat-card-avatar src="https://source.unsplash.com/random/200x200">
+    <mat-card-title>Values</mat-card-title>
+    <mat-card-subtitle>Value maintenance</mat-card-subtitle>
+    <div align="right" style="width: 100%; margin: auto;">
+      <button mat-mini-fab color="primary" (click)="goBack();" matTooltip="Previous" [matTooltipShowDelay]="500"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(getItemCount() <= 1)" (click)="onFilter();" matTooltip="Filter" [matTooltipShowDelay]="500"><mat-icon>filter_list</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" routerLink="/Values/{{selectedRowNumber}}/ValueLogs" matTooltip="Log" [matTooltipShowDelay]="500"><mat-icon>message</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" routerLink="/Values/{{selectedRowNumber}}/ValueHistorys" matTooltip="History" [matTooltipShowDelay]="500"><mat-icon>history</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" routerLink="/Values/{{selectedRowNumber}}/ValueTimers" matTooltip="Timers" [matTooltipShowDelay]="500"><mat-icon>timer</mat-icon></button>
+      <button mat-mini-fab color="primary" (click)="onNew();" matTooltip="New" [matTooltipShowDelay]="500"><mat-icon>add</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" (click)="onEdit();" matTooltip="Edit" [matTooltipShowDelay]="500"><mat-icon>edit</mat-icon></button>
+      <button mat-mini-fab color="accent" [disabled]="(selectedRow == null)" (click)="onDelete();" matTooltip="Delete" [matTooltipShowDelay]="500"><mat-icon>delete</mat-icon></button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="ValueID">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+        <mat-cell *matCellDef="let value">{{value.ValueID}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let value">{{value.Name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="InternalID">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Internal ID</mat-header-cell>
+        <mat-cell *matCellDef="let device">{{device.InternalID}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="DeviceID">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;">Device ID</mat-header-cell>
+        <mat-cell *matCellDef="let value" style="justify-content:center;">{{value.DeviceID}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="UnitID">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Unit ID</mat-header-cell>
+        <mat-cell *matCellDef="let value" style="justify-content:center;">{{value.UnitID}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Value">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Value</mat-header-cell>
+        <mat-cell *matCellDef="let value">{{value.Value}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="RetentionDays">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Retention Days</mat-header-cell>
+        <mat-cell *matCellDef="let value" style="justify-content:center;">{{value.RetentionDays}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="RetentionInterval">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Retention Interval</mat-header-cell>
+        <mat-cell *matCellDef="let value" style="justify-content:center;">{{value.RetentionInterval}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Debug">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Debug</mat-header-cell>
+        <mat-cell *matCellDef="let value" style="justify-content:center;"><mat-icon>{value.Debug, plural, =1 {bug_report}}</mat-icon></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Timestamp">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</mat-header-cell>
+        <mat-cell *matCellDef="let value">{{value.Timestamp}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="tableColumns; sticky: true"></mat-header-row>
+
+      <mat-row matRipple *matRowDef="let row; columns: tableColumns; "
+               (click)="(selectedRow == row) ? selectedRow = null : selectedRow = row; selectedRowNumber = row.ValueID;"
+               (dblclick)="selectedRow = row; selectedRowNumber = row.ValueID; onEdit();"
+               [style.background]="selectedRow == row ? 'lightblue' : ''">
+      </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[100, 10000, 1000, 500, 50, 10]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,89 @@
+<h2 mat-dialog-title>Value Timer Maintenance</h2>
+
+<form [formGroup]="form">
+
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="Name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Value</mat-label>
+      <mat-select #mode formControlName="ValueID" placeholder="Value" [compareWith]="compareValueObjects">
+        <mat-option *ngFor="let value of values" [value]="value">{{value.Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Timer Plan</mat-label>
+      <mat-select #mode formControlName="TimerPlanID" placeholder="Plan" [compareWith]="compareTimerPlanObjects">
+        <mat-option *ngFor="let plan of timerPlans" [value]="plan">{{plan.Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Random Minutes</mat-label>
+      <input matInput formControlName="Random" />
+    </mat-form-field>
+  </div>
+
+  <fieldset style="border-width:1px;">
+    <legend>Active Days</legend>
+    <mat-checkbox formControlName="Sunday">Sun</mat-checkbox>
+    <mat-checkbox formControlName="Monday">Mon</mat-checkbox>
+    <mat-checkbox formControlName="Tuesday">Tue</mat-checkbox>
+    <mat-checkbox formControlName="Wednesday">Wed</mat-checkbox>
+    <mat-checkbox formControlName="Thursday">Thu</mat-checkbox>
+    <mat-checkbox formControlName="Friday">Fri</mat-checkbox>
+    <mat-checkbox formControlName="Saturday">Sat</mat-checkbox>
+  </fieldset>
+
+  <fieldset style="border-width:1px;">
+    <legend>Details</legend>
+    <div>
+      <label id="timer-type-group-label">Type:</label>
+      <mat-radio-group formControlName="Type" >
+        <mat-radio-button class="value-timer-radio-button" *ngFor="let vt of timerTypes" [value]="vt">
+          {{vt}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <table>
+      <tr>
+        <td>
+          <fieldset style="border-width:0px;">
+            <mat-form-field>
+              <input matInput placeholder="RunTime" formControlName="RunTime" min="08:00:00" max="17:00:00" />
+            </mat-form-field>
+          </fieldset>
+        </td>
+        <td>
+          <fieldset style="border-width:0px;">
+            <mat-checkbox formControlName="Sunrise">Sunrise</mat-checkbox>
+            <mat-checkbox formControlName="Sunset">Sunset</mat-checkbox>
+          </fieldset>
+        </td>
+        <td>
+          <fieldset style="border-width:0px;">
+            <mat-form-field>
+              <mat-label>Frequency (minutes)</mat-label>
+              <input matInput formControlName="Frequency" />
+            </mat-form-field>
+          </fieldset>
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+
+  <div>
+    <br />
+    <ace fxFlex="auto" [config]="aceConfig" [(value)]="aceContent"></ace>
+  </div>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" [disabled]="(!formIsValid())" (click)="onSubmit();" matTooltip="Save" [matTooltipShowDelay]="500"><mat-icon>save</mat-icon></button>
+    <button style="margin-left:6px;" mat-raised-button color="accent" mat-dialog-close matTooltip="Cancel" [matTooltipShowDelay]="500"><mat-icon>cancel</mat-icon></button>
+  </mat-dialog-actions>
+
+</form>

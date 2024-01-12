@@ -1,0 +1,32 @@
+:host {
+  width: 100%;
+  margin: 12px auto auto auto;
+}
+
+.mat-row:hover {
+  background-color: lightgray;
+  border-radius: 4px;
+}
+
+.mat-card-subtitle {
+  display: block;
+  margin-bottom: 0px;
+  min-width: 145px;
+}
+
+.mat-column-InterfaceID {
+  flex: 0 0 50px !important;
+  width: 50px !important;
+}
+.mat-column-Active {
+  flex: 0 0 100px !important;
+  width: 100px !important;
+}
+.mat-column-Notifiable {
+  flex: 0 0 100px !important;
+  width: 100px !important;
+}
+.mat-column-Debug {
+  flex: 0 0 100px !important;
+  width: 100px !important;
+}

@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-header>
+    <img mat-card-avatar src="https://source.unsplash.com/random/200x200">
+    <mat-card-title>Device Log</mat-card-title>
+    <mat-card-subtitle>Device Log display</mat-card-subtitle>
+    <div align="right" style="width: 100%; margin: auto;">
+      <button mat-mini-fab color="primary" (click)="goBack();" matTooltip="Previous" [matTooltipShowDelay]="500"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(getItemCount() <= 1)" (click)="onFilter();" matTooltip="Filter" [matTooltipShowDelay]="500"><mat-icon>filter_list</mat-icon></button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="Timestamp">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</mat-header-cell>
+        <mat-cell *matCellDef="let log">{{log.Timestamp}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Message">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Log Message</mat-header-cell>
+        <mat-cell *matCellDef="let log">{{log.Message}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="tableColumns; sticky: true"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: tableColumns; ">
+      </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[100, 10000, 1000, 500, 50, 10]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>
