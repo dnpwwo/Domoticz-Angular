@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>Tile Maintenance</h2>
+
+<form [formGroup]="form">
+  <div>
+    <mat-form-field>
+      <mat-label>Tab</mat-label>
+      <mat-select #mode formControlName="TabID" placeholder="Tab" [compareWith]="compareTabObjects">
+        <mat-option *ngFor="let tab of tabs" [value]="tab">{{tab.Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Tile Name" formControlName="Name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Display Order</mat-label>
+      <input matInput type="number" placeholder="5" formControlName="DisplayOrder" />
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Background</mat-label>
+    <input matInput placeholder="url('images/image.png')" formControlName="Background" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Row Span</mat-label>
+    <input matInput type="number" placeholder="1" formControlName="RowSpan" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Column Span</mat-label>
+    <input matInput type="number" placeholder="2" formControlName="ColumnSpan" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Border Radius</mat-label>
+    <input matInput placeholder="4px" formControlName="BorderRadius" />
+  </mat-form-field>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" [disabled]="(!formIsValid())" (click)="onSubmit();" matTooltip="Save" [matTooltipShowDelay]="500"><mat-icon>save</mat-icon></button>
+    <button style="margin-left:6px;" mat-raised-button color="accent" mat-dialog-close matTooltip="Cancel" [matTooltipShowDelay]="500"><mat-icon>cancel</mat-icon></button>
+  </mat-dialog-actions>
+
+</form>

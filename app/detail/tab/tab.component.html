@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>Tab Maintenance</h2>
+
+<form [formGroup]="form">
+  <div>
+    <mat-form-field>
+      <mat-label>Layout</mat-label>
+      <mat-select #mode formControlName="LayoutID" placeholder="Layout" [compareWith]="compareLayoutObjects">
+        <mat-option *ngFor="let layout of layouts" [value]="layout">{{layout.Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Tab Name" formControlName="Name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Display Order</mat-label>
+      <input matInput type="number" placeholder="5" formControlName="DisplayOrder" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Icon</mat-label>
+      <input matInput placeholder="Mat-Icon Name" formControlName="Icon" />
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Background</mat-label>
+    <input matInput placeholder="url('images/image.png')" formControlName="Background"/>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Row Height</mat-label>
+    <input matInput type="number" placeholder="120" formControlName="RowHeight" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Minimum Columns</mat-label>
+    <input matInput type="number" placeholder="4" formControlName="MinColumns" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Maximum Columns</mat-label>
+    <input matInput type="number" placeholder="8" formControlName="MaxColumns" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Minimum Column Width</mat-label>
+    <input matInput type="number" placeholder="90" formControlName="MinColWidth" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Maximum Column Width</mat-label>
+    <input matInput type="number" placeholder="180" formControlName="MaxColWidth" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Gutter Width</mat-label>
+    <input matInput type="number" placeholder="5" formControlName="GutterSize" />
+  </mat-form-field>
+
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" [disabled]="(!formIsValid())" (click)="onSubmit();" matTooltip="Save" [matTooltipShowDelay]="500"><mat-icon>save</mat-icon></button>
+    <button style="margin-left:6px;" mat-raised-button color="accent" mat-dialog-close matTooltip="Cancel" [matTooltipShowDelay]="500"><mat-icon>cancel</mat-icon></button>
+  </mat-dialog-actions>
+
+</form>

@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-header>
+    <img mat-card-avatar src="https://source.unsplash.com/random/200x200">
+    <mat-card-title>Layouts</mat-card-title>
+    <mat-card-subtitle>Layout maintenance</mat-card-subtitle>
+    <div align="right" style="width: 100%; margin: auto;">
+      <button mat-mini-fab color="primary" (click)="goBack();" matTooltip="Previous" [matTooltipShowDelay]="500"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(getItemCount() <= 1)" (click)="onFilter();" matTooltip="Filter" [matTooltipShowDelay]="500"><mat-icon>filter_list</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" routerLink="/Layouts/{{selectedRowNumber}}/Tabs" matTooltip="Tabs in layout" [matTooltipShowDelay]="500"><mat-icon>tab</mat-icon></button>
+      <button mat-mini-fab color="primary" (click)="onNew();" matTooltip="New" [matTooltipShowDelay]="500"><mat-icon>add</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" (click)="onEdit();" matTooltip="Edit" [matTooltipShowDelay]="500"><mat-icon>edit</mat-icon></button>
+      <button mat-mini-fab color="accent" [disabled]="(selectedRow == null)" (click)="onDelete();" matTooltip="Delete" [matTooltipShowDelay]="500"><mat-icon>delete</mat-icon></button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="LayoutID">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+        <mat-cell *matCellDef="let layout">{{layout.LayoutID}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let layout">{{layout.Name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="MinimumWidth">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Minimum Width</mat-header-cell>
+        <mat-cell *matCellDef="let layout" style="justify-content:center;">{{layout.MinimumWidth}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Active">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Active</mat-header-cell>
+        <mat-cell *matCellDef="let layout" style="justify-content:center;"><mat-icon>{layout.Active, plural, =1 {check_circle} other {highlight_off}}</mat-icon></mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="tableColumns; sticky: true"></mat-header-row>
+
+      <mat-row matRipple *matRowDef="let row; columns: tableColumns; "
+               (click)="(selectedRow == row) ? selectedRow = null : selectedRow = row; selectedRowNumber = row.LayoutID;"
+               (dblclick)="selectedRow = row; selectedRowNumber = row.LayoutID; onEdit();"
+               [style.background]="selectedRow == row ? 'lightblue' : ''">
+      </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[100, 10000, 1000, 500, 50, 10]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

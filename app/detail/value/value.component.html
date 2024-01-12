@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Value Maintenance</h2>
+
+<form [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="Name" formControlName="Name" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Unit</mat-label>
+    <mat-select #mode formControlName="UnitID" placeholder="Unit" [compareWith]="compareUnitObjects">
+      <mat-option *ngFor="let unit of units" [value]="unit">{{unit.Name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Device</mat-label>
+    <mat-select #mode formControlName="DeviceID" placeholder="Device" [compareWith]="compareDeviceObjects">
+      <mat-option *ngFor="let device of devices" [value]="device">{{device.Name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Internal ID</mat-label>
+    <input matInput formControlName="InternalID" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Value</mat-label>
+    <input matInput formControlName="Value" />
+  </mat-form-field>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Retention Days</mat-label>
+      <input matInput formControlName="RetentionDays" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Retention Interval</mat-label>
+      <input matInput formControlName="RetentionInterval" />
+    </mat-form-field>
+  </div>
+
+  <mat-checkbox formControlName="Debug">Debug</mat-checkbox>
+
+  <div>
+    <br />
+    <ace fxFlex="auto" [config]="aceConfig" [(value)]="aceContent"></ace>
+  </div>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" [disabled]="(!formIsValid())" (click)="onSubmit();" matTooltip="Save" [matTooltipShowDelay]="500"><mat-icon>save</mat-icon></button>
+    <button style="margin-left:6px;" mat-raised-button color="accent" mat-dialog-close matTooltip="Cancel" [matTooltipShowDelay]="500"><mat-icon>cancel</mat-icon></button>
+  </mat-dialog-actions>
+
+</form>
+
