@@ -1,0 +1,16 @@
+<app-top-nav (theme)="onTheme($event)" class="fixed-topnav"></app-top-nav>
+<mat-sidenav-container class="root-container mat-background" >
+  <mat-sidenav #appDrawer mode="over" opened="false">
+    <mat-nav-list>
+      <app-menu-list-item *ngFor="let item of navItems" [item]="item"></app-menu-list-item>
+    </mat-nav-list>
+    <span class="version-info">Current build: {{version.full ? version.full : version}}</span>
+  </mat-sidenav>
+  <app-top-nav fxHide.xs></app-top-nav>
+  <mat-sidenav-content #appContent (scroll)="onScroll($event)">
+    <router-outlet></router-outlet>
+    <div fxFlex></div>
+    <button mat-mini-fab [@slideHorizontal] class="goBack" color="primary" *ngIf="showNavButtons" (click)="goBack();" matTooltip="Previous" [matTooltipShowDelay]="500"><mat-icon>arrow_back</mat-icon></button>
+    <button mat-mini-fab [@slideVertical] class="topButton" color="primary" *ngIf="showNavButtons" (click)="scrollToTop();" matTooltip="Top" [matTooltipShowDelay]="500"><mat-icon>arrow_upward</mat-icon></button>
+  </mat-sidenav-content>
+</mat-sidenav-container>
