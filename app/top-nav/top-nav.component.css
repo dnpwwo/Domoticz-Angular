@@ -1,0 +1,16 @@
+.main-toolbar {
+  width: 100%;
+  border-radius: 2px;
+  padding: 0 12px 0 12px;
+  display: grid;
+  grid-template-columns: 32px 90px auto 122px;
+  grid-template-rows: 1fr;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  height: 3rem;
+  margin: 0;
+  justify-items: center;
+  transition: background-color 500ms linear;
+  animation: 1s ease-in-out 0ms 1 fadein;
+  position: fixed;
+  z-index: 2;
+}

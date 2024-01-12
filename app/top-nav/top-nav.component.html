@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="main-toolbar">
+  <button mat-icon-button id="menu" (click)="navService.toggleNav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>{{AppName}}</span>
+  <span>{{theTime | date: 'hh:mm:ss a'}}</span>
+  <button mat-icon-button [matMenuTriggerFor]="userMenu" matTooltip="Show user menu" [matTooltipShowDelay]="500" style="justify-self: end;">
+    <mat-icon>person</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item [routerLink]="'/Authenticate'" routerLinkActive="active">Logon</button>
+  <button mat-menu-item [routerLink]="'/Profile'" routerLinkActive="active">Profile</button>
+  <button mat-menu-item (click)="themeToggle($event)">Theme</button>
+  <button mat-menu-item [routerLink]="'/Logoff'" routerLinkActive="active">Logoff</button>
+</mat-menu>

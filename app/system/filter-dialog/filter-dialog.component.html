@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>{{header}}</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput placeholder="Filter text or blank" formControlName="filter" />
+  </mat-form-field>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="true" cdkFocusInitial matTooltip="Filter" [matTooltipShowDelay]="500"><mat-icon>filter_list</mat-icon></button>
+    <button style="margin-left:6px;" (click)="onNoClick()" mat-raised-button color="accent" mat-dialog-close matTooltip="Cancel" [matTooltipShowDelay]="500"><mat-icon>cancel</mat-icon></button>
+  </mat-dialog-actions>
+
+</form>

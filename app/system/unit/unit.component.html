@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>Unit Maintenance</h2>
+
+<form [formGroup]="form">
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Unit Name" formControlName="Name" />
+  </mat-form-field>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Minimum Value</mat-label>
+      <input matInput type="number" placeholder="0" formControlName="Minimum" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Maximum Value</mat-label>
+      <input matInput placeholder="5" formControlName="Maximum" />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Default Retention Days</mat-label>
+      <input matInput type="number" placeholder="0" formControlName="RetentionDays" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Default Retention Interval</mat-label>
+      <input matInput placeholder="5" formControlName="RetentionInterval" />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field style="min-width: 100%;">
+      <mat-label>Icon List</mat-label>
+      <input matInput placeholder="Icon List" formControlName="IconList" />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field style="min-width: 100%;">
+      <mat-label>Text Labels</mat-label>
+      <input matInput placeholder="Text Labels" formControlName="TextLabels" />
+    </mat-form-field>
+  </div>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" [disabled]="(!formIsValid())" (click)="onSubmit();" matTooltip="Save" [matTooltipShowDelay]="500"><mat-icon>save</mat-icon></button>
+    <button style="margin-left:6px;" mat-raised-button color="accent" mat-dialog-close matTooltip="Cancel" [matTooltipShowDelay]="500"><mat-icon>cancel</mat-icon></button>
+  </mat-dialog-actions>
+
+</form>

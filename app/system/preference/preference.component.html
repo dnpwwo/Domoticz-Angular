@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Preference Maintenance</h2>
+
+<form [formGroup]="form">
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Preference Name" formControlName="Name" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Value</mat-label>
+    <input matInput placeholder="Value" formControlName="Value" />
+  </mat-form-field>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" [disabled]="(!formIsValid())" (click)="onSubmit();" matTooltip="Save" [matTooltipShowDelay]="500"><mat-icon>save</mat-icon></button>
+    <button style="margin-left:6px;" mat-raised-button color="accent" mat-dialog-close matTooltip="Cancel" [matTooltipShowDelay]="500"><mat-icon>cancel</mat-icon></button>
+  </mat-dialog-actions>
+
+</form>
