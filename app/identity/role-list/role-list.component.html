@@ -1,0 +1,53 @@
+<mat-card>
+  <mat-card-header>
+    <img mat-card-avatar src="https://source.unsplash.com/random/200x200">
+    <mat-card-title>Roles</mat-card-title>
+    <mat-card-subtitle>Role maintenance</mat-card-subtitle>
+    <div align="right" style="width: 100%; margin: auto;">
+      <button mat-mini-fab color="primary" (click)="goBack();" matTooltip="Previous" [matTooltipShowDelay]="500"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(getItemCount() <= 1)" (click)="onFilter();" matTooltip="Filter" [matTooltipShowDelay]="500"><mat-icon>filter_list</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" routerLink="/Roles/{{selectedRowNumber}}/Users" matTooltip="Users in role" [matTooltipShowDelay]="500"><mat-icon>people</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" routerLink="/Roles/{{selectedRowNumber}}/TableAccesss" matTooltip="Role table access" [matTooltipShowDelay]="500"><mat-icon>pageview</mat-icon></button>
+      <button mat-mini-fab color="primary" (click)="onNew();" matTooltip="New" [matTooltipShowDelay]="500"><mat-icon>add</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" (click)="onEdit();" matTooltip="Edit" [matTooltipShowDelay]="500"><mat-icon>edit</mat-icon></button>
+      <button mat-mini-fab color="accent" [disabled]="(selectedRow == null)" (click)="onDelete();" matTooltip="Delete" [matTooltipShowDelay]="500"><mat-icon>delete</mat-icon></button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="RoleID">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+        <mat-cell *matCellDef="let role">{{role.RoleID}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let role">{{role.Name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="RemoteAccess">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Remote Access</mat-header-cell>
+        <mat-cell *matCellDef="let role" style="justify-content:center;"><mat-icon i18n>{role.RemoteAccess, plural, =1 {check_circle} other {highlight_off}}</mat-icon></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="InternalTTL">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Internal Session Lifespan</mat-header-cell>
+        <mat-cell *matCellDef="let role" style="justify-content:center;">{{role.InternalTTL}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="RemoteTTL">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Remote Session Lifespan</mat-header-cell>
+        <mat-cell *matCellDef="let role" style="justify-content:center;">{{role.RemoteTTL}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="tableColumns; sticky: true"></mat-header-row>
+
+      <mat-row matRipple *matRowDef="let row; columns: tableColumns; "
+               (click)="(selectedRow == row) ? selectedRow = null : selectedRow = row; selectedRowNumber = row.RoleID;"
+               (dblclick)="selectedRow = row; selectedRowNumber = row.RoleID; onEdit();"
+               [style.background]="selectedRow == row ? 'lightblue' : ''">
+      </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[100, 10000, 1000, 500, 50, 10]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

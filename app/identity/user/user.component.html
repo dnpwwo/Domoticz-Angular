@@ -1,0 +1,54 @@
+  <h2 mat-dialog-title>User Maintenance</h2>
+
+  <form [formGroup]="form">
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Username" formControlName="UserName" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Role</mat-label>
+        <mat-select #mode formControlName="RoleID" placeholder="Role" [compareWith]="compareRoleObjects">
+          <mat-option *ngFor="let role of roles" [value]="role">{{role.Name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="First Last" formControlName="Name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email Address</mat-label>
+      <input matInput type="email" placeholder="first.last@example.com" formControlName="EmailAddress" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Mobile Number</mat-label>
+      <input matInput placeholder="0412 345 678" formControlName="MobileNumber" ng-pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+    </mat-form-field>
+
+    <div>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" formControlName="Password" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Confirm Password" formControlName="Password2" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Theme</mat-label>
+        <mat-select #mode formControlName="Theme" placeholder="Indigo">
+          <mat-option *ngFor="let theme of themes" [value]="theme.Value">{{theme.Name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-checkbox formControlName="Active">User Active</mat-checkbox>
+      <mat-checkbox formControlName="ForceChange">Force Password Change</mat-checkbox>
+    </div>
+
+    <mat-dialog-actions align="end">
+      <button mat-raised-button color="primary" [disabled]="(!formIsValid())" (click)="onSubmit();" matTooltip="Save" [matTooltipShowDelay]="500"><mat-icon>save</mat-icon></button>
+      <button style="margin-left:6px;" mat-raised-button color="accent" mat-dialog-close matTooltip="Cancel" [matTooltipShowDelay]="500"><mat-icon>cancel</mat-icon></button>
+    </mat-dialog-actions>
+
+  </form>

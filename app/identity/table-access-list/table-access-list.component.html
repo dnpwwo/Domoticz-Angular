@@ -1,0 +1,82 @@
+<mat-card>
+  <mat-card-header>
+    <img mat-card-avatar src="https://source.unsplash.com/random/200x200">
+    <mat-card-title>Table Access</mat-card-title>
+    <mat-card-subtitle>Table Access maintenance</mat-card-subtitle>
+    <div align="right" style="width: 100%; margin: auto;">
+      <button mat-mini-fab color="primary" (click)="goBack();" matTooltip="Previous" [matTooltipShowDelay]="500"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(getItemCount() <= 1)" (click)="onFilter();" matTooltip="Filter" [matTooltipShowDelay]="500"><mat-icon>filter_list</mat-icon></button>
+      <button mat-mini-fab color="primary" (click)="onNew();" matTooltip="New" [matTooltipShowDelay]="500"><mat-icon>add</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" (click)="onEdit();" matTooltip="Edit" [matTooltipShowDelay]="500"><mat-icon>edit</mat-icon></button>
+      <button mat-mini-fab color="accent" [disabled]="(selectedRow == null)" (click)="onDelete();" matTooltip="Delete" [matTooltipShowDelay]="500"><mat-icon>delete</mat-icon></button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="TableAccessID">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+        <mat-cell *matCellDef="let tableaccess">{{tableaccess.TableAccessID}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let tableaccess">{{tableaccess.Name}}</mat-cell>
+
+      </ng-container>
+
+      <ng-container matColumnDef="RoleID">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;">RoleID</mat-header-cell>
+        <mat-cell *matCellDef="let tableaccess" style="justify-content:center;">{{tableaccess.RoleID}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="CanGET">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Can GET</mat-header-cell>
+        <mat-cell *matCellDef="let tableaccess" style="justify-content:center;"><mat-icon>{tableaccess.CanGET, plural, =1 {check_circle} other {highlight_off}}</mat-icon></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="CanPOST">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Can POST</mat-header-cell>
+        <mat-cell *matCellDef="let tableaccess" style="justify-content:center;"><mat-icon>{tableaccess.CanPOST, plural, =1 {check_circle} other {highlight_off}}</mat-icon></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="CanPUT">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Can PUT</mat-header-cell>
+        <mat-cell *matCellDef="let tableaccess" style="justify-content:center;"><mat-icon>{tableaccess.CanPUT, plural, =1 {check_circle} other {highlight_off}}</mat-icon></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="CanPATCH">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Can PATCH</mat-header-cell>
+        <mat-cell *matCellDef="let tableaccess" style="justify-content:center;"><mat-icon>{tableaccess.CanPATCH, plural, =1 {check_circle} other {highlight_off}}</mat-icon></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="CanDELETE">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Can DELETE</mat-header-cell>
+        <mat-cell *matCellDef="let tableaccess" style="justify-content:center;"><mat-icon>{tableaccess.CanDELETE, plural, =1 {check_circle} other {highlight_off}}</mat-icon></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="DontGETFields">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Don't GET Fields</mat-header-cell>
+        <mat-cell *matCellDef="let tableaccess">{{tableaccess.DontGETFields}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="PUTFields">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>PUT Fields</mat-header-cell>
+        <mat-cell *matCellDef="let tableaccess">{{tableaccess.PUTFields}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="PATCHFields">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>PATCH Fields</mat-header-cell>
+        <mat-cell *matCellDef="let tableaccess">{{tableaccess.PATCHFields}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="tableColumns; sticky: true"></mat-header-row>
+
+      <mat-row matRipple *matRowDef="let row; columns: tableColumns; "
+               (click)="(selectedRow == row) ? selectedRow = null : selectedRow = row; selectedRowNumber = row.TableAccessID;"
+               (dblclick)="selectedRow = row; selectedRowNumber = row.TableAccessID; onEdit();"
+               [style.background]="selectedRow == row ? 'lightblue' : ''">
+      </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[100, 10000, 1000, 500, 50, 10]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

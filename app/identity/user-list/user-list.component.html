@@ -1,0 +1,81 @@
+<mat-card>
+  <mat-card-header>
+    <img mat-card-avatar src="https://source.unsplash.com/random/200x200">
+    <mat-card-title>Users</mat-card-title>
+    <mat-card-subtitle>User maintenance</mat-card-subtitle>
+    <div align="right" style="width: 100%; margin: auto;">
+      <button mat-mini-fab color="primary" (click)="goBack();" matTooltip="Previous" [matTooltipShowDelay]="500"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(getItemCount() <= 1)" (click)="onFilter();" matTooltip="Filter" [matTooltipShowDelay]="500"><mat-icon>filter_list</mat-icon></button>
+      <button mat-mini-fab color="primary" (click)="onNew();" matTooltip="New" [matTooltipShowDelay]="500"><mat-icon>add</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="(selectedRow == null)" (click)="onEdit();" matTooltip="Edit" [matTooltipShowDelay]="500"><mat-icon>edit</mat-icon></button>
+      <button mat-mini-fab color="accent"  [disabled]="(selectedRow == null)" (click)="onDelete();" matTooltip="Delete" [matTooltipShowDelay]="500"><mat-icon>delete</mat-icon></button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="UserID">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.UserID}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="UserName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>UserName</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.UserName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.Name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="RoleID">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Role ID</mat-header-cell>
+        <mat-cell *matCellDef="let user" style="justify-content:center;">{{user.RoleID}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Active">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Active</mat-header-cell>
+        <mat-cell *matCellDef="let user" style="justify-content:center;"><mat-icon>{user.Active, plural, =1 {check_circle} other {highlight_off}}</mat-icon></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="ForceChange">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Force Change</mat-header-cell>
+        <mat-cell *matCellDef="let user" style="justify-content:center;"><mat-icon>{user.ForceChange, plural, =1 {check_circle} other {highlight_off}}</mat-icon></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="FailedAttempts">
+        <mat-header-cell *matHeaderCellDef style="justify-content:center;" mat-sort-header>Failed Attempts</mat-header-cell>
+        <mat-cell *matCellDef="let user" style="justify-content:center;">{{user.FailedAttempts}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="EmailAddress">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Email Address</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.EmailAddress}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="MobileNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile Number</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.MobileNumber}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Theme">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Theme</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.Theme}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Timestamp">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.Timestamp}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="tableColumns; sticky: true"></mat-header-row>
+
+      <mat-row matRipple *matRowDef="let row; columns: tableColumns; "
+               (click)="(selectedRow == row) ? selectedRow = null : selectedRow = row; selectedRowNumber = row.UserID;"
+               (dblclick)="selectedRow = row; selectedRowNumber = row.UserID; onEdit();"
+               [style.background]="selectedRow == row ? 'lightblue' : ''">
+      </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[100, 10000, 1000, 500, 50, 10]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

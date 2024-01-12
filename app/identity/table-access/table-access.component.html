@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>Table Access Maintenance</h2>
+
+<form [formGroup]="form">
+  <div>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Table Name" formControlName="Name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Role</mat-label>
+      <mat-select #mode formControlName="RoleID" placeholder="Role" [compareWith]="compareRoleObjects">
+        <mat-option *ngFor="let role of roles" [value]="role">{{role.Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-checkbox formControlName="CanGET">Can GET</mat-checkbox>
+  <mat-checkbox formControlName="CanPOST">Can POST</mat-checkbox>
+  <mat-checkbox formControlName="CanPUT">Can PUT</mat-checkbox>
+  <mat-checkbox formControlName="CanPATCH">Can PATCH</mat-checkbox>
+  <mat-checkbox formControlName="CanDELETE">Can DELETE</mat-checkbox>
+  <div>
+    <mat-form-field>
+      <mat-label>Don't GET Fields</mat-label>
+      <input matInput placeholder="*" formControlName="DontGETFields" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>PUT Fields</mat-label>
+      <input matInput placeholder="*" formControlName="PUTFields" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Patch Fields</mat-label>
+      <input matInput placeholder="*" formControlName="PATCHFields" />
+    </mat-form-field>
+  </div>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" [disabled]="(!formIsValid())" (click)="onSubmit();" matTooltip="Save" [matTooltipShowDelay]="500"><mat-icon>save</mat-icon></button>
+    <button style="margin-left:6px;" mat-raised-button color="accent" mat-dialog-close matTooltip="Cancel" [matTooltipShowDelay]="500"><mat-icon>cancel</mat-icon></button>
+  </mat-dialog-actions>
+
+</form>
