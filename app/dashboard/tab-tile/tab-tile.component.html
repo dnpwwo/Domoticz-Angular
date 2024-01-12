@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-content class="card-header">Card Content</mat-card-content>
+  <mat-card-header>
+    <img mat-card-avatar src="https://source.unsplash.com/random/200x200">
+    <mat-card-title>{{tile.Name}}</mat-card-title>
+    <mat-card-subtitle>{{tile.RowSpan}}x{{tile.ColumnSpan}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>Card Content</mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button color="primary" matTooltip="Previous" [matTooltipShowDelay]="500"><mat-icon>skip_previous</mat-icon></button>
+    <button mat-icon-button color="primary" matTooltip="Rewind" [matTooltipShowDelay]="500"><mat-icon>fast_rewind</mat-icon></button>
+    <button mat-icon-button color="primary" matTooltip="Stop" [matTooltipShowDelay]="500"><mat-icon>stop</mat-icon></button>
+    <button mat-icon-button color="primary" matTooltip="Play" [matTooltipShowDelay]="500"><mat-icon>play_arrow</mat-icon></button>
+    <button mat-icon-button color="accent" matTooltip="Pause" [matTooltipShowDelay]="500"><mat-icon>pause</mat-icon></button>
+    <button mat-icon-button color="primary" matTooltip="Fast Forward" [matTooltipShowDelay]="500"><mat-icon>fast_forward</mat-icon></button>
+    <button mat-icon-button color="accent" matTooltip="Next" [matTooltipShowDelay]="500"><mat-icon>skip_next</mat-icon></button>
+  </mat-card-actions>
+  <mat-card-footer>2020-03-26 21:09:09</mat-card-footer>
+</mat-card>

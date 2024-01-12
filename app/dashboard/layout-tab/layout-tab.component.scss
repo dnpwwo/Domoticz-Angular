@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+@mixin primary-colours-theme($theme) {
+  $primary: map-get($theme, primary);
+
+  .primary-100 {
+    background-color: mat.get-color-from-palette($primary, 200);
+  }
+}
+
+mat-grid-list {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+mat-grid-tile {
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.mat-figure {
+  background: lightblue;
+  display: inherit !important;
+}
+//@import url('file:///D:\Domoticz New\Angular8\src\app\dashboard\home\home.component.css');
+@import 'src/app/dashboard/home/home.component.css';

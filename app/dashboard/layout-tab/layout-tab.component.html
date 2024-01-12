@@ -1,0 +1,16 @@
+<mat-grid-list #elementGrid
+               [cols]="numColumns"
+               [rowHeight]="rowHeight"
+               [gutterSize]="gutterSize"
+               [style.min-width]="gridMinWidth"
+               [style.max-width]="gridMaxWidth"
+               [style.background-image]="backgroundImage"
+               [style.background-color]="backgroundColour"
+               (window:resize)="onResize($event)">
+  <mat-grid-tile *ngFor="let tile of tiles; let tileIndex = index"
+                 [rowspan]="tile.RowSpan"
+                 [colspan]="tile.ColumnSpan"
+                 [style.border-radius]="tile.BorderRadius">
+    <dmz-tab-tile [tile]="tile"></dmz-tab-tile>
+  </mat-grid-tile>
+</mat-grid-list>

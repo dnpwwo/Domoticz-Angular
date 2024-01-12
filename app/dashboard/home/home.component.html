@@ -1,0 +1,23 @@
+<mat-tab-group #tabContainer
+               class="main-tab-group mt-2"
+               [selectedIndex]="selectedTab"
+               [dynamicHeight]="true"
+               (selectedTabChange)="tabChanged($event)"
+               style="width: -webkit-fill-available;">
+  <mat-tab *ngFor="let tab of tabs; let tabIndex = index">
+    <ng-template mat-tab-label>
+      {{ tab.Name }}
+      <i class="material-icons">
+        {{ tab.Icon }}
+      </i>
+    </ng-template>
+    <div>
+      <dmz-layout-tab id="{{'tab-'+tab.TabID}}" [tab]="tab"></dmz-layout-tab>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item>Profile</button>
+  <button mat-menu-item>Theme</button>
+  <button mat-menu-item>Logoff</button>
+</mat-menu>
